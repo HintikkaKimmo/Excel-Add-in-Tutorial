@@ -66,6 +66,7 @@
 	            $('#sort-table').click(sortTable);
 	            $('#create-chart').click(createChart);
 	            $('#freeze-header').click(freezeHeader);
+	            $('#open-dialog').click(openDialog);
 	        });
 	    };
 
@@ -169,6 +170,21 @@
 	                console.log("Debug info: " + JSON.stringify(error.debugInfo));
 	            }
 	        });
+	    }
+
+	    let dialog = null;
+
+	    function openDialog() {
+	        Office.context.ui.displayDialogAsync('https://localhost:3000/popup.html', { height: 35, width: 25 }, function (result) {
+	            dialog = result.value;
+	            dialog.addEventHandler(Microsoft.Office.WebExtension.EventType.DialogMessageReceived, processMessage);
+	        });
+	    }
+
+	    function processMessage(arg) {
+	        console.log(arg.message);
+	        $('#user-name').text(arg.message);
+	        dialog.close();
 	    }
 	})();
 
