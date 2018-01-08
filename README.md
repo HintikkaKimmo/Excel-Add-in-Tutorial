@@ -25,7 +25,7 @@ This repo contains the start and end states of a series of Excel Web Add-in tuto
 
 ## To use the project
 
-This sample is meant to accompany the tutorials that begin at: [Excel Tutorial: Create Table](https://dev.office.com/docs/add-ins/excel/excel-tutorial-create-table).
+This sample is meant to accompany the tutorials that begin at: [Excel Tutorial: Create Table](https://docs.microsoft.com/en-us/office/dev/add-ins/tutorials/excel-tutorial-create-table).
 
 There are two versions of the sample, in the folders **Start** and **Completed**.
 
@@ -41,8 +41,8 @@ Questions about Microsoft Office 365 development in general should be posted to 
 
 ## Additional resources
 
-* [Office add-in documentation](https://dev.office.com/docs/add-ins/overview/office-add-ins)
-* [Office Dev Center](http://dev.office.com/)
+* [Office add-in documentation](https://docs.microsoft.com/en-us/office/dev/add-ins/)
+* [Office Dev Center](https://developer.microsoft.com/office)
 * More Office Add-in samples at [OfficeDev on Github](https://github.com/officedev)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
