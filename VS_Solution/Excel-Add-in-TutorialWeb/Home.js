@@ -21,6 +21,7 @@
 			$('#sort-table').click(sortTable);
 			$('#create-chart').click(createChart);
 			$('#freeze-header').click(freezeHeader);
+			$('#open-dialog').click(openDialog);
 		});
 	};
 
@@ -154,5 +155,25 @@
 					console.log("Debug info: " + JSON.stringify(error.debugInfo));
 				}
 			});
+	}
+
+	let dialog = null;
+	function openDialog() {
+		// TODO1: Call the Office Shared API that opens a dialog
+		Office.context.ui.displayDialogAsync(
+			'https://localhost:44359/popup.html',
+			{ height: 45, width: 55 },
+
+			// TODO2: Add callback parameter.
+			function(result) {
+				dialog = result.value;
+				dialog.addEventHandler(Microsoft.Office.WebExtension.EventType.DialogMessageReceived, processMessage);
+			}
+		);
+	}
+
+	function processMessage(arg) {
+		$('#user-name').text(arg.message);
+		dialog.close();
 	}
 })();
