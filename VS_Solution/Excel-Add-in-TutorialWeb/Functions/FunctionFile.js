@@ -1,6 +1,17 @@
-﻿// The initialize function must be run each time a new page is loaded.
+﻿/*
+ * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+ * See LICENSE in the project root for license information.
+ */
+
+'use strict';
+
 (function () {
-    Office.initialize = function (reason) {
-        // If you need to initialize something you can do so here.
-    };
+
+	// The initialize function must be run each time a new page is loaded
+	Office.initialize = function (reason) {
+
+	};
+
+	// Add any ui-less function here
+
 })();

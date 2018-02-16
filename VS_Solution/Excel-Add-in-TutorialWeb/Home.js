@@ -1,121 +1,60 @@
-﻿(function () {
-    "use strict";
+﻿/*
+ * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+ * See LICENSE in the project root for license information.
+ */
 
-    var cellToHighlight;
-    var messageBanner;
+'use strict';
 
-    // The initialize function must be run each time a new page is loaded.
-    Office.initialize = function (reason) {
-        $(document).ready(function () {
-            // Initialize the FabricUI notification mechanism and hide it
-            var element = document.querySelector('.ms-MessageBanner');
-            messageBanner = new fabric.MessageBanner(element);
-            messageBanner.hideBanner();
-            
-            // If not using Excel 2016, use fallback logic.
-            if (!Office.context.requirements.isSetSupported('ExcelApi', '1.1')) {
-                $("#template-description").text("This sample will display the value of the cells that you have selected in the spreadsheet.");
-                $('#button-text').text("Display!");
-                $('#button-desc').text("Display the selection");
+(function () {
+	Office.initialize = function (reason) {
+		$(document).ready(function () {
 
-                $('#highlight-button').click(displaySelectedCells);
-                return;
-            }
+			// TODO1: Determine if the user's version of Office supports all the 
+			//        Office.js APIs that are used in the tutorial.
+			if (!Office.context.requirements.isSetSupported('ExcelApi', 1.7)) {
+				console.log('Sorry. The tutorial add-in uses Excel.js APIs that are not available in your version of Office.');
+			} 
 
-            $("#template-description").text("This sample highlights the highest value from the cells you have selected in the spreadsheet.");
-            $('#button-text').text("Highlight!");
-            $('#button-desc').text("Highlights the largest number.");
-                
-            loadSampleData();
+			// TODO2: Assign event handlers and other initializaton logic.
+			$('#create-table').click(createTable);
+		});
+	};
 
-            // Add a click event handler for the highlight button.
-            $('#highlight-button').click(hightlightHighestValue);
-        });
-    };
+	// TODO3: Add handlers and business logic functions here.
+	function createTable() {
+		Excel.run(function (context) {
 
-    function loadSampleData() {
-        var values = [
-            [Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000)],
-            [Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000)],
-            [Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000)]
-        ];
+			// TODO4: Queue table creation logic here.
+			const currentWorksheet = context.workbook.worksheets.getActiveWorksheet();
+			const expensesTable = currentWorksheet.tables.add("A1:D1", true /*hasHeaders*/);
+			expensesTable.name = "ExpensesTable";
 
-        // Run a batch operation against the Excel object model
-        Excel.run(function (ctx) {
-            // Create a proxy object for the active sheet
-            var sheet = ctx.workbook.worksheets.getActiveWorksheet();
-            // Queue a command to write the sample data to the worksheet
-            sheet.getRange("B3:D5").values = values;
+			// TODO5: Queue commands to populate the table with data.
+			expensesTable.getHeaderRowRange().values =
+				[["Date", "Merchant", "Category", "Amount"]];
 
-            // Run the queued-up commands, and return a promise to indicate task completion
-            return ctx.sync();
-        })
-        .catch(errorHandler);
-    }
+			expensesTable.rows.add(null /*add at the end*/, [
+				["1/1/2017", "The Phone Company", "Communications", "120"],
+				["1/2/2017", "Northwind Electric Cars", "Transportation", "142.33"],
+				["1/5/2017", "Best For You Organics Company", "Groceries", "27.9"],
+				["1/10/2017", "Coho Vineyard", "Restaurant", "33"],
+				["1/11/2017", "Bellows College", "Education", "350.1"],
+				["1/15/2017", "Trey Research", "Other", "135"],
+				["1/15/2017", "Best For You Organics Company", "Groceries", "97.88"]
+			]);
 
-    function hightlightHighestValue() {
-        // Run a batch operation against the Excel object model
-        Excel.run(function (ctx) {
-            // Create a proxy object for the selected range and load its properties
-            var sourceRange = ctx.workbook.getSelectedRange().load("values, rowCount, columnCount");
+			// TODO6: Queue commands to format the table.
+			expensesTable.columns.getItemAt(3).getRange().numberFormat = [['€#,##0.00']];
+			expensesTable.getRange().format.autofitColumns();
+			expensesTable.getRange().format.autofitRows();
 
-            // Run the queued-up command, and return a promise to indicate task completion
-            return ctx.sync()
-                .then(function () {
-                    var highestRow = 0;
-                    var highestCol = 0;
-                    var highestValue = sourceRange.values[0][0];
-
-                    // Find the cell to highlight
-                    for (var i = 0; i < sourceRange.rowCount; i++) {
-                        for (var j = 0; j < sourceRange.columnCount; j++) {
-                            if (!isNaN(sourceRange.values[i][j]) && sourceRange.values[i][j] > highestValue) {
-                                highestRow = i;
-                                highestCol = j;
-                                highestValue = sourceRange.values[i][j];
-                            }
-                        }
-                    }
-
-                    cellToHighlight = sourceRange.getCell(highestRow, highestCol);
-                    sourceRange.worksheet.getUsedRange().format.fill.clear();
-                    sourceRange.worksheet.getUsedRange().format.font.bold = false;
-
-                    // Highlight the cell
-                    cellToHighlight.format.fill.color = "orange";
-                    cellToHighlight.format.font.bold = true;
-                })
-                .then(ctx.sync);
-        })
-        .catch(errorHandler);
-    }
-
-    function displaySelectedCells() {
-        Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
-            function (result) {
-                if (result.status === Office.AsyncResultStatus.Succeeded) {
-                    showNotification('The selected text is:', '"' + result.value + '"');
-                } else {
-                    showNotification('Error', result.error.message);
-                }
-            });
-    }
-
-    // Helper function for treating errors
-    function errorHandler(error) {
-        // Always be sure to catch any accumulated errors that bubble up from the Excel.run execution
-        showNotification("Error", error);
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    }
-
-    // Helper function for displaying notifications
-    function showNotification(header, content) {
-        $("#notification-header").text(header);
-        $("#notification-body").text(content);
-        messageBanner.showBanner();
-        messageBanner.toggleExpansion();
-    }
+			return context.sync();
+		})
+			.catch(function (error) {
+				console.log("Error: " + error);
+				if (error instanceof OfficeExtension.Error) {
+					console.log("Debug info: " + JSON.stringify(error.debugInfo));
+				}
+			});
+	}
 })();
