@@ -109,6 +109,21 @@
 										<SourceLocation resid="Contoso.Taskpane.Url" />
 									</Action>
 								</Control>
+								<Control xsi:type="Button" id="ToggleProtection">
+									<Label resid="ProtectionButtonLabel"/>
+									<Supertip>
+										<Title resid="ProtectionButtonLabel"/>
+										<Description resid="ProtectionButtonToolTip"/>
+									</Supertip>
+									<Icon>
+										<bt:Image size="16" resid="Contoso.tpicon_16x16" />
+										<bt:Image size="32" resid="Contoso.tpicon_32x32" />
+										<bt:Image size="80" resid="Contoso.tpicon_80x80" />
+									</Icon>
+									<Action xsi:type="ExecuteFunction">
+										<FunctionName>toggleProtection</FunctionName>
+									</Action>
+								</Control>
 							</Group>
 						</OfficeTab>
 					</ExtensionPoint>
@@ -133,12 +148,14 @@
 				<bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
 				<bt:String id="Contoso.Group1Label" DefaultValue="Commands Group" />
 				<bt:String id="Contoso.GetStarted.Title" DefaultValue="Get started with your sample add-in!" />
+				<bt:String id="ProtectionButtonLabel" DefaultValue="Toggle Worksheet Protection" />
 			</bt:ShortStrings>
 			<!-- LongStrings max characters==250. -->
 			<bt:LongStrings>
 				<bt:String id="Contoso.TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
 				<bt:String id="Contoso.GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started." />
-			</bt:LongStrings>
+				<bt:String id="ProtectionButtonToolTip" DefaultValue="Click to protect or unprotect the current worksheet." />
+			</bt:LongStrings>			
 		</Resources>
 	</VersionOverrides>
 	<!-- End Add-in Commands Mode integration. -->
