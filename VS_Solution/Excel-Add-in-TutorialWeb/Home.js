@@ -19,6 +19,7 @@
 			$('#create-table').click(createTable);
 			$('#filter-table').click(filterTable);
 			$('#sort-table').click(sortTable);
+			$('#create-chart').click(createChart);
 		});
 	};
 
@@ -93,6 +94,36 @@
 			];
 
 			expensesTable.sort.apply(sortFields);
+
+			return context.sync();
+		})
+			.catch(function(error) {
+				console.log("Error: " + error);
+				if (error instanceof OfficeExtension.Error) {
+					console.log("Debug info: " + JSON.stringify(error.debugInfo));
+				}
+			});
+	}
+
+	function createChart() {
+		Excel.run(function(context) {
+
+			// TODO1: Queue commands to get the range of data to be charted.
+			const currentWorksheet = context.workbook.worksheets.getActiveWorksheet();
+			const expensesTable = currentWorksheet.tables.getItem('ExpensesTable');
+			const dataRange = expensesTable.getDataBodyRange();
+
+			// TODO2: Queue command to create the chart and define its type.
+			let chart = currentWorksheet.charts.add('ColumnClustered', dataRange, 'auto');
+
+			// TODO3: Queue commands to position and format the chart.
+			chart.setPosition("A15", "F30");
+			chart.title.text = "Expenses";
+			chart.legend.position = "right"
+			chart.legend.format.fill.setSolidColor("white");
+			chart.dataLabels.format.font.size = 15;
+			chart.dataLabels.format.font.color = "black";
+			chart.series.getItemAt(0).name = 'Value in €';
 
 			return context.sync();
 		})
