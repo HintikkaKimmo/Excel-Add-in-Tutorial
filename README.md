@@ -1,6 +1,6 @@
 # Excel Web Add-in project for use with the Excel Getting Started tutorials
 
-This repo contains the start and end states of a series of Excel Web Add-in tutorials that show users how to use the Excel.js to create a table, sort a table, filter a table, create a chart, freeze a row of a worksheet, protect the worksheet from editing, and create a custom button on the Excel ribbon.
+This repo contains the start and end states of an Excel Web Add-in tutorial that show users how to use the Excel.js to create a table, sort a table, filter a table, create a chart, freeze a row of a worksheet, protect the worksheet from editing, and create a custom button on the Excel ribbon.
 
 
 ## Table of Contents
@@ -13,6 +13,7 @@ This repo contains the start and end states of a series of Excel Web Add-in tuto
 ## Change History
 
 * December 5th, 2017: Initial version.
+* February 26thj, 2018: Updated links and minor fixes to readme.
 
 
 ## Prerequisites
@@ -25,13 +26,13 @@ This repo contains the start and end states of a series of Excel Web Add-in tuto
 
 ## To use the project
 
-This sample is meant to accompany the tutorials that begin at: [Excel Tutorial: Create Table](https://docs.microsoft.com/en-us/office/dev/add-ins/tutorials/excel-tutorial-create-table).
+This sample is meant to accompany the tutorial at: [Excel Tutorial](https://docs.microsoft.com/en-us/office/dev/add-ins/tutorials/excel-tutorial).
 
 There are two versions of the sample, in the folders **Start** and **Completed**.
 
-To use the **Before** version and manually add the code, follow the procedures in the article linked to above. Then go on to each subsequent tutorial in the series. Each one links to its successor.
+To use the **Before** version and manually add the code, follow the procedures in the article linked to above. Then go on to each subsequent stage in the tutorial. Each one links to its successor.
 
-To work with the **Completed** version, follow all the steps in the **Test the add-in** section of each of the tutorials.
+To work with the **Completed** version, follow all the steps in the **Setup** section of the tutorial setup stage (but substitute "Completed" for "Start" in the instructions, and then follow the steps in the **Test the add-in** section of each stage of the tutorial.
 
 ## Questions and comments
 
