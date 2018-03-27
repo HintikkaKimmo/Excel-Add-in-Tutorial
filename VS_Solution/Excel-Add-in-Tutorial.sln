@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel-Add-in-Tutorial", "Excel-Add-in-Tutorial.csproj", "{A6258D12-997A-4CC7-BB04-140FE6EF0223}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel-Add-in-Tutorial", "Excel-Add-in-Tutorial\Excel-Add-in-Tutorial.csproj", "{A6258D12-997A-4CC7-BB04-140FE6EF0223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel-Add-in-TutorialWeb", "..\Excel-Add-in-TutorialWeb\Excel-Add-in-TutorialWeb.csproj", "{AF203DE0-473C-4BC2-83CB-450C1F69290E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel-Add-in-TutorialWeb", "Excel-Add-in-TutorialWeb\Excel-Add-in-TutorialWeb.csproj", "{AF203DE0-473C-4BC2-83CB-450C1F69290E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
