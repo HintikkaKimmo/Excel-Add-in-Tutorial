@@ -13,14 +13,16 @@ This repo contains the start and end states of an Excel Web Add-in tutorial that
 ## Change History
 
 * December 5th, 2017: Initial version.
-* February 26thj, 2018: Updated links and minor fixes to readme.
+* February 26th, 2018: Updated links and minor fixes to readme.
+* March 27th, 2018: Updated readme to note Visual Studio version.
 
 
 ## Prerequisites
 
 * An Office 365 account.
 - Excel 2016, version 1711 (Build 8730.1000 Click-to-Run) or later. You might need to be an Office Insider to get this version. For more information, see [Be an Office Insider](https://products.office.com/en-us/office-insider?tab=tab-1).
-- [Node and npm](https://nodejs.org/en/) 
+- [Node and npm](https://nodejs.org/en/) (Not needed for the Visual Studio version. See below.)
+- Visual Studio (needed only for the Visual Studio version. See below.)
 - [Git Bash](https://git-scm.com/downloads) (Or another git client.)
 
 
@@ -28,11 +30,13 @@ This repo contains the start and end states of an Excel Web Add-in tutorial that
 
 This sample is meant to accompany the tutorial at: [Excel Tutorial](https://docs.microsoft.com/en-us/office/dev/add-ins/tutorials/excel-tutorial).
 
-There are two versions of the sample, in the folders **Start** and **Completed**.
+There are three versions of the sample, in the folders **Start** and **Completed**, and **VS_Solution**. 
 
 To use the **Before** version and manually add the code, follow the procedures in the article linked to above. Then go on to each subsequent stage in the tutorial. Each one links to its successor.
 
 To work with the **Completed** version, follow all the steps in the **Setup** section of the tutorial setup stage (but substitute "Completed" for "Start" in the instructions, and then follow the steps in the **Test the add-in** section of each stage of the tutorial.
+
+To work with the **VS_Solution** (which is also a completed version), simply clone (or download) this repo, open the *.sln file, and press F5 when Visual Studio opens. Then press **Show Taskpane** on the **Home** menu, and press each of the buttons in the taskpane in order from top to bottom. 
 
 ## Questions and comments
 
