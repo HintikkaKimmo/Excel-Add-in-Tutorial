@@ -14,7 +14,7 @@
     "jquery": "^3.1.1",
     "office-addin-validator": "^1.0.1",
     "webpack": "1.13.1",
-    "babel": "6.5.2",
+    "babel": "6.23.0",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.17.0",
     "babel-preset-es2016": "^6.16.0",
